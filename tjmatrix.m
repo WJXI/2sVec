@@ -81,30 +81,18 @@ for i=1:dim_YWX
     [cac_Rstate] = Rstate(object4(i,:),morphism4(i,:));
     totalRstate=[totalRstate; cac_Rstate];
 end
-
 [Numbasis,~]=size(BASISV);
-for i=1:Numbasis
-    norm=BASISV(1,:)*BASISV(1,:)';
-    if abs(norm)>0.01
-        norm_basis(i,:)=BASISV(i,:)/sqrt(norm);
-    else
-        norm_basis(i,:)=BASISV(i,:);
-    end
-end
-
 [Numstate,~]=size(totalRstate);
-for i=1:Numstate
-    %norm=totalRstate(i,:)*totalRstate(i,:)';
-    if abs(norm)>0.01 
-        norm_state(i,:)=totalRstate(i,:)/sqrt(norm);
-    else
-        norm_state(i,:)=totalRstate(i,:);
-    end
-end
 
 for i=1:Numbasis
     for j=1:Numstate
-        tj(i,j)=norm_state(j,:)*norm_basis(i,:)';
+        tj(i,j)=totalRstate(j,:)*BASISV(i,:)';
+    end
+end
+for i=1:size(tj,2)
+    NORM=tj(:,i)'*tj(:,i);
+    if NORM>0.01
+        tj(:,i)=tj(:,i)/sqrt(NORM);
     end
 end
 

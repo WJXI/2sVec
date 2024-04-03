@@ -488,18 +488,6 @@ elseif sum(abs(object-[0 0 0 0 0 0]))==0
     retraction1=1;
 end
 
-[target_V, origin_V]=size(retraction1);
-
-if target_V>=origin_V
-    norm1=retraction1'*retraction1;
-    retraction1=retraction1/sqrt(norm1(1,1));
-    retraction2=retraction2/sqrt(norm1(1,1));
-else
-    norm1=retraction1*retraction1';
-    retraction1=retraction1/sqrt(norm1(1,1));
-    retraction2=retraction2/sqrt(norm1(1,1));
-end
-
 
 retraction1=vpa(retraction1,2);
 retraction2=vpa(retraction2,2);
